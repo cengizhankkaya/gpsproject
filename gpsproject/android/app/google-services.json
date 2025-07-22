@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776379086900",
+    "project_id": "gpsapp-918d0",
+    "storage_bucket": "gpsapp-918d0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776379086900:android:03056507a66e092b94b261",
+        "android_client_info": {
+          "package_name": "com.cengizhan.gpsproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZpiJkzTyE658i9XJuphFBZHwH2-bIWrE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

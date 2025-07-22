@@ -1,0 +1,301 @@
+# ARAÇ PARK UYGULAMASI YAPISI
+
+lib/
+├── main.dart                  # Uygulamanın giriş noktası
+├── core/                      # Temel bileşenler
+│   ├── constants/             
+│   │   ├── api_constants.dart # API anahtarları ve URL'ler
+│   │   ├── app_constants.dart # Uygulama sabitleri
+│   │   └── theme_constants.dart # Tema sabitleri
+│   ├── utils/                 
+│   │   ├── location_helper.dart # Konum yardımcı fonksiyonları
+│   │   ├── permission_handler.dart # İzin işlemleri
+│   │   └── date_formatter.dart # Tarih format işlemleri
+│   └── widgets/              
+│       ├── custom_button.dart # Özel butonlar
+│       ├── loading_widget.dart # Yükleme göstergesi
+│       └── error_widget.dart  # Hata gösterimi
+├── data/                     
+│   ├── models/               
+│   │   ├── user_model.dart   # Kullanıcı modeli
+│   │   ├── vehicle_model.dart # Araç modeli
+│   │   └── parking_model.dart # Park yeri modeli
+│   ├── repositories/         
+│   │   ├── auth_repository.dart # Kimlik doğrulama
+│   │   ├── location_repository.dart # Konum işlemleri
+│   │   └── parking_repository.dart # Park yeri işlemleri
+│   └── services/             
+│       ├── map_service.dart  # Harita servisi
+│       ├── auth_service.dart # Kimlik doğrulama servisi
+│       └── notification_service.dart # Bildirim servisi
+├── features/                 
+│   ├── auth/                # Kimlik doğrulama modülü
+│   │   ├── screens/         
+│   │   │   ├── login_screen.dart
+│   │   │   └── register_screen.dart
+│   │   └── viewmodels/      
+│   │       └── auth_viewmodel.dart
+│   ├── map/                 # Harita modülü
+│   │   ├── screens/         
+│   │   │   ├── map_screen.dart
+│   │   │   └── navigation_screen.dart
+│   │   └── viewmodels/      
+│   │       └── map_viewmodel.dart
+│   └── parking/             # Park özellikleri modülü
+│       ├── screens/         
+│       │   ├── save_parking_screen.dart
+│       │   └── parking_history_screen.dart
+│       └── viewmodels/      
+│           └── parking_viewmodel.dart
+├── routes/                  
+│   └── app_router.dart      # Yönlendirme yapılandırması
+├── localization/            
+│   ├── app_localizations.dart
+│   └── languages/          
+│       ├── tr.json
+│       └── en.json
+└── theme/                   
+    └── app_theme.dart       # Uygulama teması
+
+# VERİTABANI YAPISI
+
+Koleksiyon: users
+Field (Alan)         Type (Tip)           Value (Değer)
+---------------------------------------------------
+userId              string              Kullanıcı ID
+email               string              E-posta
+name                string              Ad Soyad
+createdAt           timestamp           Kayıt tarihi
+updatedAt           timestamp           Güncelleme tarihi
+
+Koleksiyon: vehicles
+Field (Alan)         Type (Tip)           Value (Değer)
+---------------------------------------------------
+vehicleId           string              Araç ID
+userId              string              Kullanıcı ID
+plate               string              Plaka
+brand               string              Marka
+model               string              Model
+color               string              Renk
+
+Koleksiyon: parkings
+Field (Alan)         Type (Tip)           Value (Değer)
+---------------------------------------------------
+parkingId           string              Park ID
+userId              string              Kullanıcı ID
+vehicleId           string              Araç ID
+latitude            number              Enlem
+longitude           number              Boylam
+timestamp           timestamp           Park zamanı
+description         string              Not/Açıklama
+locationName        string              Konum adı
+floor               string              Kat bilgisi (opsiyonel)
+section             string              Bölüm bilgisi (opsiyonel)
+photoUrl            string              Fotoğraf URL (opsiyonel)
+createdAt           timestamp           Oluşturma zamanı
+updatedAt           timestamp           Güncelleme zamanı
+
+# ÖZELLİKLER VE FONKSİYONLAR
+
+1. Kullanıcı İşlemleri
+   - Kayıt
+   - Giriş
+   - Şifre sıfırlama
+   - Profil güncelleme
+
+2. Araç İşlemleri
+   - Araç ekleme
+   - Araç silme
+   - Araç güncelleme
+   - Araç listesi görüntüleme
+
+3. Park İşlemleri
+   - Park konumu kaydetme
+   - Park detayı ekleme
+   - Fotoğraf ekleme
+   - Park geçmişi görüntüleme
+   - Park konumu paylaşma
+
+4. Harita İşlemleri
+   - Canlı konum gösterimi
+   - Park yeri işaretleme
+   - Navigasyon
+   - Rota çizimi
+   - Mesafe ve süre hesaplama
+
+5. Bildirim Sistemi
+   - Park süresi hatırlatıcıları
+   - Yaklaşma bildirimleri
+   - Sistem bildirimleri
+
+6. Ayarlar
+   - Dil seçenekleri
+   - Tema seçenekleri
+   - Bildirim ayarları
+   - Konum izinleri
+   - Veri yedekleme
+
+# GÜVENLİK ÖNLEMLERİ
+
+1. Kullanıcı Doğrulama
+   - E-posta doğrulama
+   - İki faktörlü kimlik doğrulama
+   - Güvenli şifre politikası
+
+2. Veri Güvenliği
+   - Konum verisi şifreleme
+   - Kişisel veri koruma
+   - Güvenli depolama
+   - Yedekleme sistemi
+
+3. İzin Yönetimi
+   - Konum izinleri
+   - Kamera izinleri
+   - Bildirim izinleri
+   - Depolama izinleri
+
+# EKRAN YAPISI VE TASARIMI
+
+1. Açılış Ekranı (Splash Screen)
+   - Uygulama logosu
+   - Yükleme animasyonu
+   - Giriş durumu kontrolü
+   - Gerekli izinlerin kontrolü
+
+2. Giriş/Kayıt Ekranları
+   - Giriş Ekranı:
+     - E-posta/şifre giriş alanları
+     - "Beni Hatırla" seçeneği
+     - Şifremi Unuttum butonu
+     - Kayıt Ol yönlendirme butonu
+     - Sosyal medya ile giriş seçenekleri
+   
+   - Kayıt Ekranı:
+     - Ad-soyad alanı
+     - E-posta alanı
+     - Şifre ve şifre tekrar alanı
+     - KVKK onay kutusu
+     - Kayıt ol butonu
+
+3. Ana Ekran (Harita Ekranı)
+   - Tam ekran harita görünümü
+   - Üst kısımda:
+     - Arama çubuğu
+     - Profil butonu
+   - Alt kısımda:
+     - "Aracımı Park Et" butonu
+     - "Aracımı Bul" butonu
+   - Sağ alt köşede:
+     - Mevcut konuma git butonu
+     - Zoom kontrolleri
+   - Sol üst köşede:
+     - Menü butonu
+
+4. Araç Park Etme Ekranı
+   - Harita görünümü
+   - Park pozisyonu işaretleme alanı
+   - Park detayları formu:
+     - Araç seçimi (dropdown)
+     - Kat bilgisi (AVM/otopark için)
+     - Bölüm/alan bilgisi
+     - Not ekleme alanı
+     - Fotoğraf ekleme butonu
+   - Kaydet butonu
+
+5. Navigasyon Ekranı
+   - Tam ekran harita
+   - Üst kısımda:
+     - Tahmini varış süresi
+     - Mesafe bilgisi
+   - Alt kısımda:
+     - Yol tarifi adımları
+     - Sesli navigasyon kontrolü
+   - Sağ tarafta:
+     - Alternatif rotalar
+   - Sol üstte:
+     - Navigasyonu sonlandır butonu
+
+6. Araç Yönetimi Ekranı
+   - Araç listesi
+   - Her araç kartında:
+     - Araç bilgileri (marka, model, plaka)
+     - Düzenle/Sil butonları
+   - "Yeni Araç Ekle" butonu
+
+7. Park Geçmişi Ekranı
+   - Tarih bazlı liste görünümü
+   - Her park kaydı için:
+     - Park tarihi ve saati
+     - Konum adı
+     - Park süresi
+     - Fotoğraf (varsa)
+     - "Buraya Git" butonu
+
+8. Profil Ekranı
+   - Profil fotoğrafı
+   - Kullanıcı bilgileri
+   - Düzenleme seçenekleri
+   - İstatistikler:
+     - Toplam park sayısı
+     - En sık kullanılan lokasyonlar
+
+9. Ayarlar Ekranı
+   - Bildirim ayarları
+     - Park süresi hatırlatıcıları
+     - Yaklaşma bildirimleri
+   - Uygulama ayarları:
+     - Dil seçimi
+     - Tema seçimi (Açık/Koyu)
+     - Harita tipi seçimi
+   - Hesap ayarları:
+     - Şifre değiştirme
+     - E-posta değiştirme
+   - Yardım ve Destek:
+     - SSS
+     - İletişim
+     - Gizlilik Politikası
+
+10. Bildirim Merkezi Ekranı
+    - Aktif bildirimler
+    - Geçmiş bildirimler
+    - Bildirim filtreleme seçenekleri
+
+# TASARIM PRENSİPLERİ
+
+1. Genel Tasarım İlkeleri
+   - Material Design 3 kullanımı
+   - Tutarlı renk şeması
+   - Kolay kullanılabilir arayüz
+   - Hata durumları için uygun geribildirim
+   - Yükleme durumları için animasyonlar
+   - Responsive tasarım
+   - Erişilebilirlik standartları
+   - Gesture desteği
+
+2. Kullanıcı Deneyimi Optimizasyonu
+   - Sezgisel navigasyon
+   - Minimum tıklama sayısı
+   - Hızlı yükleme süreleri
+   - Offline çalışma desteği
+   - Kolay anlaşılır arayüz
+   - Kullanıcı geri bildirimleri
+   - Performans optimizasyonu
+
+3. Ekran Geçişleri ve Animasyonlar
+   - Yumuşak geçişler
+   - Yükleme animasyonları
+   - İnteraktif geri bildirimler
+   - Hareket tasarımı
+   - Sayfa geçiş efektleri
+
+
+   Merhaba Michael
+   Öncelikle ilginden dolayı teşekkür ederim. Cursor'u yakalşık 1 aydır kullanıyorum ve gayet memnunum. 
+   ücret iadesi istemiyorum.Üniversite öğrencisiyim ve ülkemdeki ekonomik durumdan dolayı cursor'u uzun vadede kullanamıyorum.
+   Kullandığım süreçte çok güzel projeler yaptım ek dosyasına bir ekran görüntsü ekliyorum. Kullanırkenki negatifliklerden bahsetmem gerekirse 
+   verdiğim promtlara cevap ve tekpi süresi çok uzun sürüyor bunun sebebi Türkçe dilinde kulladığım için olabilir bilmiyorum.
+   Tepki sürelerini daha optimize edilebilirse çok güzel olur Ama genel olarak çok memnunum.
+   Bir bilgisayar mühendisliği öğrencisi oalrak cursor'u kullanmak benim için çok güzel. Gelcekte kullanmak dileğiyle.
+   İyi çalışmalar.
+
+   Türkiyeden sevgilerle.
